@@ -1,15 +1,21 @@
-# dout
+# dynout
 
-To install dependencies:
+Dynamic output for terminal applications. - Easily update previously printed line.
 
-```bash
-bun install
-```
+## Example
 
-To run:
+```ts
+import { Output } from "dynout";
 
-```bash
-bun run index.ts
-```
+Output.line("This is a static line that will never change");
 
-This project was created using `bun init` in bun v1.1.27. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+const dl = Output.dline("This line can be changed later");
+
+// ... do something
+Output.line("print other things");
+
+dl.update(current => {
+  return "Second line changed!";
+));
+
+dl.close(); // prevent any more changes to this line
